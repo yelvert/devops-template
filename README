@@ -1,0 +1,62 @@
+DEVOPS
+
+
+Usage: ./devops [GLOBAL_OPTIONS] COMMAND [ARGUMENTS]
+
+GLOBAL_OPTIONS
+  -v(vvv) | --verbose=#
+    Sets the verbosity level. -v would set the level to 1, -vvvv would set it to 4. Can also be used as --verbosity=4 to set the level directly.
+
+COMMAND
+  config         Displays config information
+  help           Displays the full usage information.
+  update_readme  Updates the README with current usage information.
+  version        Displays version information
+
+
+
+
+
+----- config
+Usage: config [PATH]
+
+PATH can be a `jq` path to any variable in /Users/yelvert/Projects/devops-template/config.json
+
+
+
+
+----- help
+
+Usage: ./devops [GLOBAL_OPTIONS] COMMAND [ARGUMENTS]
+
+GLOBAL_OPTIONS
+  -v(vvv) | --verbose=#
+    Sets the verbosity level. -v would set the level to 1, -vvvv would set it to 4. Can also be used as --verbosity=4 to set the level directly.
+
+COMMAND
+  config         Displays config information
+  help           Displays the full usage information.
+  update_readme  Updates the README with current usage information.
+  version        Displays version information
+
+
+
+
+----- update_readme
+
+Usage: update_readme
+
+
+
+
+----- version
+Usage: version [PACKAGE]
+
+PACKAGE
+  ansible    Display version information for ansible.
+  aws        Display version information for aws.
+  jq         Display version information for jq.
+  packer     Display version information for packer.
+  terraform  Display version information for terraform.
+  all        Display version information for all packages.
+

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+shopt -s extglob
+
+VERBOSE=0
+
+for opt in "$@"; do
+  case $opt in
+    -+(v))
+      VERBOSE="$((${#opt} - 1))"
+      shift
+      ;;
+    !(-*))
+      break
+      ;;
+  esac
+done
+
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/lib/paths.sh
+. "${LIB_PATH}/common.sh"
+. "${LIB_PATH}/commands.sh"
+
+if [ -z ${1+x} ]; then
+  COMMAND="help"
+else
+  available_command? "${1}" && COMMAND="${1}" || COMMAND="help"
+  shift
+fi
+
+"command.${COMMAND}" "$@"
