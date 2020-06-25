@@ -19,10 +19,7 @@ $(
 HELP
 )
 "
-    # local temp="$(mktemp)"
-    # cat "${README_TEMPLATE}" >> "${temp}"
     sed -e "s/!!USAGE!!/$(printf '%s' "${usage}" | tr '\n' '\r' | sed 's/[\&/]/\\&/g')/g" "${README_TEMPLATE}" | tr '\r' '\n' > "${README_PATH}"
-    # mv "${temp}" "${README_PATH}"
   }
 
   function command.update_readme.description () {

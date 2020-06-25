@@ -6,9 +6,7 @@ if [ -z ${__COMMANDS_CONFIG_SOURCED__+x} ]; then
 
   function command.config () {
     local command_or_path="${1:-all}"
-    if [ "${command_or_path}" == "help" ] ; then
-      command.config.help
-    elif [ "${command_or_path}" == "all" ] ; then
+    if [ "${command_or_path}" == "all" ] ; then
       config
     else
       config "${command_or_path}"
@@ -24,7 +22,7 @@ if [ -z ${__COMMANDS_CONFIG_SOURCED__+x} ]; then
       cat <<HELP
 Usage: config [PATH]
 
-PATH can be a \`jq\` path to any variable in ${CONFIG_FILE}
+PATH can be a \`jq\` path to any variable in config.json
 
 HELP
 )

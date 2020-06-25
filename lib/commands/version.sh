@@ -5,7 +5,6 @@ if [ -z ${__COMMANDS_VERSION_SOURCED__+x} ]; then
 
   function command.version () {
     local command_or_package="${1:-all}"
-    [ "${command_or_package}" == "help" ] && command.version.help
     if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "ansible" ] ; then
       echo "=========== ansible =========="
       ansible --version

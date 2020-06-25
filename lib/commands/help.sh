@@ -4,7 +4,22 @@ if [ -z ${__COMMANDS_HELP_SOURCED__+x} ]; then
   AVAILABLE_COMMANDS+=('help')
 
   function command.help () {
-    command.help.help
+    local command="${1:-help}"
+    if available_command? "${command}" ; then
+      "command.${command}.help"
+    else
+      cat <<-EOF
+Unknown command: ${command}
+
+Available commands
+$(
+  for c in "${AVAILABLE_COMMANDS[@]}"; do
+    echo -e "  ${c}"
+  done
+)
+EOF
+      exit 100
+    fi
   }
 
   function command.help.description () {
