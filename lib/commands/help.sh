@@ -1,14 +1,15 @@
-if [ -z ${__COMMANDS_HELP_SOURCED__+x} ]; then
-  . $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../paths.sh
+[ -z ${__COMMANDS_HELP_SOURCED__+x} ] && __COMMANDS_HELP_SOURCED__=true || return 0
 
-  AVAILABLE_COMMANDS+=('help')
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../paths.sh
 
-  function command.help () {
-    local command="${1:-help}"
-    if available_command? "${command}" ; then
-      "command.${command}.help"
-    else
-      cat <<-EOF
+AVAILABLE_COMMANDS+=('help')
+
+function command.help () {
+  local command="${1:-help}"
+  if available_command? "${command}" ; then
+    "command.${command}.help"
+  else
+    cat <<-EOF
 Unknown command: ${command}
 
 Available commands
@@ -18,17 +19,17 @@ $(
   done
 )
 EOF
-      exit 100
-    fi
-  }
+    exit 100
+  fi
+}
 
-  function command.help.description () {
-    echo "Displays the full usage information."
-  }
+function command.help.description () {
+  echo "Displays the full usage information."
+}
 
-  function command.help.help () {
-    local usage="$(
-      cat <<HELP
+function command.help.help () {
+  local usage="$(
+    cat <<HELP
 
 Usage: ${0} [GLOBAL_OPTIONS] COMMAND [ARGUMENTS]
 
@@ -48,8 +49,5 @@ $(
 HELP
 )
 "
-    echo -e "${usage}"
-  }
-
-  __COMMANDS_HELP_SOURCED__=true
-fi
+  echo -e "${usage}"
+}

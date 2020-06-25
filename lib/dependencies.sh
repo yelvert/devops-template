@@ -1,9 +1,7 @@
-if [ -z ${__DEPENDENCIES_SOURCED__+x} ]; then
-  . $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/paths.sh
+[ -z ${__DEPENDENCIES_SOURCED__+x} ] && __DEPENDENCIES_SOURCED__=true || return 0
 
-  [ -d "${DEPENDENCY_DIR}" ] || mkdir -p "${DEPENDENCY_DIR}"
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/paths.sh
 
-  for file in $DEPENDENCIES_LIB_PATH/*.sh ; do . "${file}" ; done
+[ -d "${DEPENDENCY_DIR}" ] || mkdir -p "${DEPENDENCY_DIR}"
 
-  __DEPENDENCIES_SOURCED__=true
-fi
+for file in $DEPENDENCIES_LIB_PATH/*.sh ; do . "${file}" ; done

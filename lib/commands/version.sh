@@ -1,39 +1,40 @@
-if [ -z ${__COMMANDS_VERSION_SOURCED__+x} ]; then
-  . $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../paths.sh
+[ -z ${__COMMANDS_VERSION_SOURCED__+x} ] && __COMMANDS_VERSION_SOURCED__=true || return 0
 
-  AVAILABLE_COMMANDS+=('version')
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../paths.sh
 
-  function command.version () {
-    local command_or_package="${1:-all}"
-    if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "ansible" ] ; then
-      echo "=========== ansible =========="
-      ansible --version
-    fi
-    if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "aws" ] ; then
-      echo "=========== aws =========="
-      aws --version
-    fi
-    if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "jq" ] ; then
-      echo "=========== jq =========="
-      jq --version
-    fi
-    if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "packer" ] ; then
-      echo "=========== packer =========="
-      packer --version
-    fi
-    if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "terraform" ] ; then
-      echo "=========== terraform =========="
-      terraform --version
-    fi
-  }
+AVAILABLE_COMMANDS+=('version')
 
-  function command.version.description () {
-    echo "Displays version information"
-  }
+function command.version () {
+  local command_or_package="${1:-all}"
+  if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "ansible" ] ; then
+    echo "=========== ansible =========="
+    ansible --version
+  fi
+  if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "aws" ] ; then
+    echo "=========== aws =========="
+    aws --version
+  fi
+  if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "jq" ] ; then
+    echo "=========== jq =========="
+    jq --version
+  fi
+  if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "packer" ] ; then
+    echo "=========== packer =========="
+    packer --version
+  fi
+  if [ "${command_or_package}" == "all" ] || [ "${command_or_package}" == "terraform" ] ; then
+    echo "=========== terraform =========="
+    terraform --version
+  fi
+}
 
-   function command.version.help () {
-    local usage="$(
-      cat <<HELP
+function command.version.description () {
+  echo "Displays version information"
+}
+
+function command.version.help () {
+  local usage="$(
+    cat <<HELP
 Usage: version [PACKAGE]
 
 PACKAGE
@@ -49,8 +50,5 @@ $(
 HELP
 )
 "
-    echo -e "${usage}"
-  }
-
-  __COMMANDS_VERSION_SOURCED__=true
-fi
+  echo -e "${usage}"
+}

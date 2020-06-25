@@ -1,13 +1,11 @@
-if [ -z ${__COMMANDS_SOURCED__+x} ]; then
-  . $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/paths.sh
+[ -z ${__COMMANDS_SOURCED__+x} ] && __COMMANDS_SOURCED__=true || return 0
 
-  AVAILABLE_COMMANDS=()
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/paths.sh
 
-  for file in $COMMANDS_LIB_PATH/*.sh ; do . "${file}" ; done
+AVAILABLE_COMMANDS=()
 
-  function available_command? () {
-    array_contains AVAILABLE_COMMANDS "${1}"
-  }
+for file in $COMMANDS_LIB_PATH/*.sh ; do . "${file}" ; done
 
-  __COMMANDS_SOURCED__=true
-fi
+function available_command? () {
+  array_contains AVAILABLE_COMMANDS "${1}"
+}

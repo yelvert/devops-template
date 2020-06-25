@@ -20,11 +20,20 @@ done
 . "${LIB_PATH}/common.sh"
 . "${LIB_PATH}/commands.sh"
 
-if [ -z ${1+x} ]; then
-  COMMAND="help"
+COMMAND="${1:-help}"
+shift
+if available_command? "${COMMAND}" ; then
+  "command.${COMMAND}" "$@"
 else
-  available_command? "${1}" && COMMAND="${1}" || COMMAND="help"
-  shift
-fi
+  cat <<-EOF
+Unknown command: ${COMMAND}
 
-"command.${COMMAND}" "$@"
+Available commands
+$(
+  for c in "${AVAILABLE_COMMANDS[@]}"; do
+    echo -e "  ${c}"
+  done
+)
+EOF
+  exit 100
+fi

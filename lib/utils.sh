@@ -1,18 +1,16 @@
-if [ -z ${__UTILS_SOURCED__+x} ]; then
-  . $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/paths.sh
+[ -z ${__UTILS_SOURCED__+x} ] && __UTILS_SOURCED__=true || return 0
 
-  array_contains () { 
-    local array="$1[@]"
-    local seeking=$2
-    local in=1
-    for element in "${!array}"; do
-        if [[ $element == "$seeking" ]]; then
-            in=0
-            break
-        fi
-    done
-    return $in
-  }
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/paths.sh
 
-  __UTILS_SOURCED__=true
-fi
+array_contains () { 
+  local array="$1[@]"
+  local seeking=$2
+  local in=1
+  for element in "${!array}"; do
+      if [[ $element == "$seeking" ]]; then
+          in=0
+          break
+      fi
+  done
+  return $in
+}
